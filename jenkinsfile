@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t appimage .'
-                    sh 'docker tag app-pod:latest kmannedev/app-pod'
+                    sh 'docker tag appimage:latest kmannedev/appimage'
                 }
             }
         }
