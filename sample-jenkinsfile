@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    stages {
+        stage('Code Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mkranthi/kubernetes-automation.git'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                    docker.build('appimage')
+                }
+            }
+        }
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                        docker.image('appimage').push('latest')
+                    }
+                }
+            }
+        }
+        stage('Pull Image from Docker Hub') {
+            steps {
+                script {
+                    docker.image('kammne/appimage').pull()
+                }
+            }
+        }
+        stage('Build Pod') {
+            steps {
+                script {
+                    sh 'kubectl create -f sample.pod.yaml'
+                }
+            }
+        }
+    }
+}
