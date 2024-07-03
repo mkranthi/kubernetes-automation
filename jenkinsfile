@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages ('code checkout'){
+        step{
+             git branch: 'main','https://github.com/mkranthi/kubernetes-automation.git'
+        }
+    }
+    stage('build image'){
+        step{
+            docker build -t appimage .
+        }
+    }
+    stage('push code to docker hub'){
+        step{
+            docker login 
+            docker push -t kammnedev/appimage .
+        }
+    }
+    stage(' pull code from docker hub'){
+        step{
+            docker pull kammne/appimage
+        }
+        stage(' build pod'){
+            step {
+                kubectl create -f sample.pod.yaml
+            }
+        }
+    }
+}
