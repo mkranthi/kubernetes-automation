@@ -13,5 +13,12 @@ pipeline {
                 }
             }
         }
+        stage ('k8s manifest file'){
+            steps {
+                script{
+                    sh ' kubectl create -f app-pod.yaml'
+                }
+            }
+        }
     }
 }
