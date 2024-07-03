@@ -5,5 +5,4 @@ metadata:
 spec:
   containers:
     - name: pod-image
-      image: appimage
-      imagePullPolicy: Never
+      image: kmannedev/appimage
