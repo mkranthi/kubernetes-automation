@@ -28,5 +28,10 @@ pipeline {
                 sh "docker push devcompute.jfrog.io/dev-auto/appimage-jfrog"
             }
         }
+        stage('pullimage from jfrog artifactory'){
+            steps{
+                sh "docker pull devcompute.jfrog.io/dev-auto/appimage-jfrog"
+            }
+        }
     }
 }
