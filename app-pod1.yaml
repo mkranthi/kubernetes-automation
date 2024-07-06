@@ -5,4 +5,4 @@ metadata:
 spec:
   containers:
     - name: pod-image
-      image: appimage-jfrog
+      image: devcompute.jfrog.io/dev-auto/appimage-jfrog
