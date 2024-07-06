@@ -9,8 +9,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    sh 'docker build -t appimage1 .'
-                    sh 'docker images'
+                    sh 'docker build -t appimage-jfrog .'
                 }
             }
         }
@@ -21,12 +20,12 @@ pipeline {
         }
         stage('docker tag'){
             steps{
-                sh "docker tag appimage1 devcompute.jfrog.io/artifactory/devops-docker-local/appimage1"    
+                sh "docker tag appimage-jfrog devcompute.jfrog.io/dev-auto/appimage-jfrog"   
             }
         }
         stage('push into jfrog artifactory'){
             steps{
-                sh "docker push devcompute.jfrog.io/artifactory/devops-docker-local/appimage1"
+                sh "docker push devcompute.jfrog.io/dev-auto/appimage-jfrog"
             }
         }
     }
