@@ -10,13 +10,17 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t appimage .'
-                    sh 'docker tag appimage:latest kmannedev/appimage'
                 }
+            }
+        }
+        stage('docker tag'){
+            steps{
+                sh "docker tag docker_image devcompute.jfrog.io/artifactory/devops-docker/appimage"    
             }
         }
         stage('login into jfrog artifactory'){
             steps{
-                sh "docker login https://devcompute.jfrog.io -u admin -p Python@36"
+                sh "docker login https://devcompute.jfrog.io -u admin -p Devops@1"
             }
         }
         stage('push into jfrog artifactory'){
