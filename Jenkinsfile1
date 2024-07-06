@@ -33,5 +33,10 @@ pipeline {
                 sh "docker pull devcompute.jfrog.io/dev-auto/appimage-jfrog"
             }
         }
+        stage('create pod'){
+            steps{
+                sh "kubectl create -f app-pod1.yaml"
+            }
+        }
     }
 }
