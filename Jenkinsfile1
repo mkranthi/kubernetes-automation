@@ -21,7 +21,7 @@ pipeline {
         }
         stage('push into jfrog artifactory'){
             steps{
-                sh "docker push https://devcompute.jfrog.io/artifactory/devops-docker/"
+                sh "docker push https://devcompute.jfrog.io/artifactory/devops-docker/kmannedev/appimage"
             }
         }
     }
