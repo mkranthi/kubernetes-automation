@@ -21,7 +21,7 @@ pipeline {
         }
         stage('docker tag'){
             steps{
-                sh "docker tag docker_image devcompute.jfrog.io/artifactory/devops-docker/appimage1"    
+                sh "docker tag appimage1 devcompute.jfrog.io/artifactory/devops-docker/appimage1"    
             }
         }
         stage('push into jfrog artifactory'){
