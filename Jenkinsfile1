@@ -9,14 +9,9 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    sh 'docker build -t appimage .'
+                    sh 'docker build -t appimage1 .'
                     sh 'docker images'
                 }
-            }
-        }
-        stage('docker tag'){
-            steps{
-                sh "docker tag docker_image devcompute.jfrog.io/artifactory/devops-docker/appimage"    
             }
         }
         stage('login into jfrog artifactory'){
@@ -24,9 +19,14 @@ pipeline {
                 sh "docker login https://devcompute.jfrog.io -u admin -p Devops@1"
             }
         }
+        stage('docker tag'){
+            steps{
+                sh "docker tag docker_image devcompute.jfrog.io/artifactory/devops-docker/appimage1"    
+            }
+        }
         stage('push into jfrog artifactory'){
             steps{
-                sh "docker push https://devcompute.jfrog.io/artifactory/devops-docker/appimage"
+                sh "docker push https://devcompute.jfrog.io/artifactory/devops-docker/appimage1"
             }
         }
     }
